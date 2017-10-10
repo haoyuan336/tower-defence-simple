@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "d660cd8f-8a63-499d-8dc7-b6eb311ef8aa",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "塔防_13": {
+      "ver": "1.0.3",
+      "uuid": "fd63c30b-0997-4ca6-a1c3-ea822cdb6426",
+      "rawTextureUuid": "d660cd8f-8a63-499d-8dc7-b6eb311ef8aa",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 93,
+      "height": 114,
+      "rawWidth": 93,
+      "rawHeight": 114,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
