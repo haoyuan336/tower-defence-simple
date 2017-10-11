@@ -1438,7 +1438,10 @@
       {
         "__uuid__": "fa0fba83-0486-4490-bcfe-ba624beb1c4c"
       }
-    ]
+    ],
+    "updateMenuPrefab": {
+      "__uuid__": "48ff2758-e2c7-4e72-af87-c35d40195c30"
+    }
   },
   {
     "__type__": "cc.PrefabInfo",

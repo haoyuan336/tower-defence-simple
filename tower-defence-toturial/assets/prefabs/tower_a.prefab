@@ -66,7 +66,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "塔防_03",
+    "_name": "sprite",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -109,7 +109,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 10.5
+      "y": 10
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -150,9 +150,9 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "2f16dc47-f997-4c86-a261-bcbe53e74d50"
     },
-    "fileId": "4eIKWmW/pExrZ462CC1Ruo",
+    "fileId": "3dJ8bYj6NFq6Zt3dYax3uH",
     "sync": false
   },
   {
@@ -162,7 +162,21 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": true
+    "_enabled": true,
+    "spriteFrames": [
+      {
+        "__uuid__": "d1befbbf-e943-47a2-946d-488f68b62422"
+      },
+      {
+        "__uuid__": "98a89f27-5e7e-4b98-bbfc-cf4945037728"
+      },
+      {
+        "__uuid__": "f9fa18d3-2519-4f9b-8960-10d21f20e416"
+      }
+    ],
+    "spriteNode": {
+      "__id__": 3
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -170,7 +184,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "2f16dc47-f997-4c86-a261-bcbe53e74d50"
     },
     "fileId": "7ekGc12KBO7ZE7XSkJBhEv",
     "sync": false

@@ -66,7 +66,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "塔防_15",
+    "_name": "sprite",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -127,7 +127,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "86699686-0d08-435a-8bbf-c655be95febe"
+      "__uuid__": "fd63c30b-0997-4ca6-a1c3-ea822cdb6426"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -150,9 +150,9 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "fa0fba83-0486-4490-bcfe-ba624beb1c4c"
     },
-    "fileId": "17psg+TeNG46iOhGF9WNfG",
+    "fileId": "88LDex3rVAh4OVUFwexU7g",
     "sync": false
   },
   {
@@ -162,7 +162,21 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": true
+    "_enabled": true,
+    "spriteFrames": [
+      {
+        "__uuid__": "fd63c30b-0997-4ca6-a1c3-ea822cdb6426"
+      },
+      {
+        "__uuid__": "86699686-0d08-435a-8bbf-c655be95febe"
+      },
+      {
+        "__uuid__": "bf14fda5-b116-4513-955a-a14f92c0d656"
+      }
+    ],
+    "spriteNode": {
+      "__id__": 3
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -170,7 +184,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "fa0fba83-0486-4490-bcfe-ba624beb1c4c"
     },
     "fileId": "dde7Hf4BVDe5ItU93Yb3GI",
     "sync": false
