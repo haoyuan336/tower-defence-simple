@@ -8,7 +8,6 @@ const TowerPosNodeState = {
 };
 cc.Class({
     extends: cc.Component,
-
     properties: {
         enemyPathNodes: {
             default: [],
@@ -42,6 +41,8 @@ cc.Class({
         global.event.on("build_tower", this.buildTower.bind(this));
         global.event.on("update_tower", this.updateTower.bind(this));
         global.event.on("sell_tower",this.sellTower.bind(this));
+        global.event.on("game_start", this.gameStart.bind(this));
+
     },
     setTouchEvent: function (node) {
         node.on(cc.Node.EventType.TOUCH_START, (event)=>{
@@ -120,5 +121,26 @@ cc.Class({
         let node = this.closeMenu();
         this.setState(node, TowerPosNodeState.Null);
         node.tower.getComponent("tower").sellTower();
+    },
+    gameStart: function () {
+        cc.loader.loadRes("./config/level_config",  (err, result)=> {
+            if (err){
+                cc.log("load config " + err);
+            }else {
+                cc.log("level config" + JSON.stringify(result));
+            }
+            let config = result["level_1"];
+            let wavesConfig = config["waves"];
+            this.wavesConfig = wavesConfig;
+        });
+    },
+    addWave: function () {
+
+    },
+    addEnemy: function () {
+        
+    },
+    update: function (dt) {
+        
     }
 });
