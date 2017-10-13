@@ -17,7 +17,7 @@ cc.Class({
     update: function (dt) {
         if (this.nowTime > 0){
             this.nowTime -= dt;
-            cc.log("now time = " +( this.nowTime - Math.floor(this.nowTime)));
+            // cc.log("now time = " +( this.nowTime - Math.floor(this.nowTime)));
 
             if ((this.nowTime - Math.floor(this.nowTime) )< 0.1){
                 this.timeCountDownLabel.string = Math.floor(this.nowTime);

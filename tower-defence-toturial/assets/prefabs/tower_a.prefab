@@ -176,7 +176,8 @@
     ],
     "spriteNode": {
       "__id__": 3
-    }
+    },
+    "towerType": "tower_a"
   },
   {
     "__type__": "cc.PrefabInfo",

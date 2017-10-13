@@ -28,6 +28,10 @@ cc.Class({
         updateMenuPrefab: {
             default: null,
             type: cc.Prefab
+        },
+        enemyPrefab: {
+            default: null,
+            type: cc.Prefab
         }
     },
 
@@ -42,7 +46,11 @@ cc.Class({
         global.event.on("update_tower", this.updateTower.bind(this));
         global.event.on("sell_tower",this.sellTower.bind(this));
         global.event.on("game_start", this.gameStart.bind(this));
-
+        this.currentWaveCount = 0;
+        this.currentEnemyCount = 0;
+        this.addEnemyCurrentTime = 0;
+        this.addWaveCurrentTime = 0;
+        this.enemyNodeList = [];
     },
     setTouchEvent: function (node) {
         node.on(cc.Node.EventType.TOUCH_START, (event)=>{
@@ -130,17 +138,59 @@ cc.Class({
                 cc.log("level config" + JSON.stringify(result));
             }
             let config = result["level_1"];
-            let wavesConfig = config["waves"];
-            this.wavesConfig = wavesConfig;
+            this.levelConfig = config;
+            // this.currentWaveConfig = wavesConfig[0];
         });
     },
-    addWave: function () {
-
-    },
-    addEnemy: function () {
-        
+    addEnemy: function (type) {
+        // cc.log("add Enemy" + this.currentEnemyCount);
+        // cc.log("add Wave " + this.currentWaveCount)
+        let enemy = cc.instantiate(this.enemyPrefab);
+        enemy.getComponent("enemy").initWithData(type, this.enemyPathNodes);
+        enemy.parent = this.node;
+        this.enemyNodeList.push(enemy);
     },
     update: function (dt) {
-        
+        if (this.currentWaveConfig){
+            if (this.addEnemyCurrentTime > this.currentWaveConfig.dt){
+                this.addEnemyCurrentTime = 0;
+                this.currentEnemyCount ++;
+                this.addEnemy(this.currentWaveConfig.type);
+                if (this.currentEnemyCount === this.currentWaveConfig.count){
+                    this.currentWaveConfig = undefined;
+                    this.currentEnemyCount = 0;
+                }
+            }
+            else {
+                this.addEnemyCurrentTime += dt;
+            }
+        }else {
+            if (this.addWaveCurrentTime > this.levelConfig.dt){
+                this.currentWaveConfig = this.levelConfig.waves[this.currentWaveCount];
+                if (this.currentWaveCount < this.levelConfig.waves.length ){
+                    this.currentWaveCount ++;
+                }else {
+                    this.currentWaveConfig = undefined;
+                }
+                this.addWaveCurrentTime = 0;
+            }else {
+                this.addWaveCurrentTime += dt;
+            }
+        }
+
+
+
+        for (let i = 0 ; i < this.towerPosNodes.length ; i ++){
+            let tower = this.towerPosNodes[i].tower;
+            if (!!tower && tower.getComponent("tower").isFree()){
+                for (let j = 0 ; j < this.enemyNodeList.length ; j ++){
+                    let enemy = this.enemyNodeList[j];
+                    if (enemy.getComponent("enemy").isLiving()){
+                        // let distance = cc.pDistance(tower)
+                       tower.getComponent("tower").setEnemy(enemy);
+                    }
+                }
+            }
+        }
     }
 });
