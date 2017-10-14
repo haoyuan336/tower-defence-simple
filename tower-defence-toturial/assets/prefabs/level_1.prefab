@@ -1444,6 +1444,9 @@
     },
     "enemyPrefab": {
       "__uuid__": "7deaee16-f3af-4ba6-9946-5d399e5a6b33"
+    },
+    "bulletPrefab": {
+      "__uuid__": "c3c896d7-b64e-4bf8-b30d-5bd7d272f87a"
     }
   },
   {

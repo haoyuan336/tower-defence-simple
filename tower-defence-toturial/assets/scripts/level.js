@@ -32,6 +32,10 @@ cc.Class({
         enemyPrefab: {
             default: null,
             type: cc.Prefab
+        },
+        bulletPrefab: {
+            default: null,
+            type: cc.Prefab
         }
     },
 
@@ -46,11 +50,13 @@ cc.Class({
         global.event.on("update_tower", this.updateTower.bind(this));
         global.event.on("sell_tower",this.sellTower.bind(this));
         global.event.on("game_start", this.gameStart.bind(this));
+        global.event.on("shoot_bullet", this.addBullet.bind(this));
         this.currentWaveCount = 0;
         this.currentEnemyCount = 0;
         this.addEnemyCurrentTime = 0;
         this.addWaveCurrentTime = 0;
         this.enemyNodeList = [];
+        this.bulletNodeList = [];
     },
     setTouchEvent: function (node) {
         node.on(cc.Node.EventType.TOUCH_START, (event)=>{
@@ -178,8 +184,6 @@ cc.Class({
             }
         }
 
-
-
         for (let i = 0 ; i < this.towerPosNodes.length ; i ++){
             let tower = this.towerPosNodes[i].tower;
             if (!!tower && tower.getComponent("tower").isFree()){
@@ -192,5 +196,13 @@ cc.Class({
                 }
             }
         }
+    },
+    addBullet: function (tower, position) {
+
+        let bullet = cc.instantiate(this.bulletPrefab);
+        // bullet.position = tower.position;
+        bullet.parent = this.node;
+        bullet.getComponent("bullet").initWithData(tower, position, this.enemyNodeList);
+
     }
 });

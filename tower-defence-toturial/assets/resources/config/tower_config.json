@@ -3,14 +3,16 @@
   {
     "damages": [1, 2, 3],
     "attack_ranges": [200,250, 300],
-    "look_range": 300
+    "look_range": 300,
+    "shoot_dts": [0.5, 0.4 , 0.3]
 
   },
   "tower_b":
   {
     "damages": [2,3,4],
     "attack_ranges": [250,300,350],
-    "look_range": 400
+    "look_range": 400,
+    "shoot_dts": [1, 0.8 , 0.6]
 
   }
 }
