@@ -18,21 +18,22 @@ cc.Class({
         let angle = cc.pAngleSigned(this.direction, cc.p(0, 1));
         this.node.rotation = (180 / Math.PI) * angle;
         this.enemyNodeList = enemyNodeList;
+        this.damage = tower.getComponent("tower").getDamage();
     },
 
     update: function (dt) {
         // cc.log("direction " + JSON.stringify(this.direction));
-
-
-
-
         this.node.position = cc.pAdd(this.node.position , cc.pMult(this.direction , this.speed * dt));
 
         for (let i = 0 ; i < this.enemyNodeList.length ; i ++){
             let enemy = this.enemyNodeList[i];
-            let distance = cc.pDistance(enemy.position, this.node.position);
-            if (distance < (enemy.width * 0.5  + this.node.width * 0.5)){
-                this.node.destroy();
+            if (enemy.getComponent("enemy").isLiving()){
+                let distance = cc.pDistance(enemy.position, this.node.position);
+                if (distance < (enemy.width * 0.5  + this.node.width * 0.5)){
+                    enemy.getComponent("enemy").beAttacked(this.damage);
+                    this.node.destroy();
+                    // cc.log("")
+                }
             }
         }
 

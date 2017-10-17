@@ -51,6 +51,7 @@ cc.Class({
         global.event.on("sell_tower",this.sellTower.bind(this));
         global.event.on("game_start", this.gameStart.bind(this));
         global.event.on("shoot_bullet", this.addBullet.bind(this));
+        global.event.on("sell_tower", this.sellTower.bind(this));
         this.currentWaveCount = 0;
         this.currentEnemyCount = 0;
         this.addEnemyCurrentTime = 0;
@@ -135,6 +136,7 @@ cc.Class({
         let node = this.closeMenu();
         this.setState(node, TowerPosNodeState.Null);
         node.tower.getComponent("tower").sellTower();
+        node.tower = undefined;
     },
     gameStart: function () {
         cc.loader.loadRes("./config/level_config",  (err, result)=> {
@@ -186,16 +188,20 @@ cc.Class({
 
         for (let i = 0 ; i < this.towerPosNodes.length ; i ++){
             let tower = this.towerPosNodes[i].tower;
-            if (!!tower && tower.getComponent("tower").isFree()){
+            if (tower != undefined && tower.getComponent("tower").isFree()){
                 for (let j = 0 ; j < this.enemyNodeList.length ; j ++){
                     let enemy = this.enemyNodeList[j];
                     if (enemy.getComponent("enemy").isLiving()){
                         // let distance = cc.pDistance(tower)
                        tower.getComponent("tower").setEnemy(enemy);
+                    }else if (enemy.getComponent("enemy").isDead()){
+                      cc.log("从列表里面删掉");
+                      this.enemyNodeList.splice(j , 1);
                     }
                 }
             }
         }
+
     },
     addBullet: function (tower, position) {
 

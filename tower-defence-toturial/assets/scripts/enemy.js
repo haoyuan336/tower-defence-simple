@@ -11,6 +11,14 @@ cc.Class({
         spriteFrames: {
             default: [],
             type: cc.SpriteFrame
+        },
+        spriteNode: {
+            default: null,
+            type: cc.Sprite
+        },
+        healthProgressBar: {
+            default: null,
+            type: cc.ProgressBar
         }
     },
 
@@ -20,11 +28,13 @@ cc.Class({
         this.node.opacity = 0;
         this.direction = cc.p(0, 0);
         this.currentPathPointCount = 0;
+        this.currentHealthCount = 0;
+        this.totalHealthCount = 1;
     }
     ,
     initWithData: function (type, pathPoints) {
         //0 - 6
-        this.node.getComponent(cc.Sprite).spriteFrame = this.spriteFrames[type];
+        this.spriteNode.spriteFrame = this.spriteFrames[type];
         this.pathPoints = pathPoints;
         this.node.position = pathPoints[0].position;
         cc.loader.loadRes("./config/monster_config", (err, result)=>{
@@ -34,7 +44,8 @@ cc.Class({
                 // cc.log("enemy result = " + JSON.stringify(result));
                 let config = result["enemy_" + type];
                 this.speed = config.speed;
-                this.health = config.health;
+                this.currentHealthCount = config.health;
+                this.totalHealthCount = config.health;
                 this.setState(EnemyState.Running);
             }
         });
@@ -54,6 +65,7 @@ cc.Class({
                 this.node.position = cc.pAdd(this.node.position, cc.pMult(this.direction, this.speed * dt));
             }
         }
+        this.healthProgressBar.progress = this.currentHealthCount / this.totalHealthCount;
     },
     setState: function (state) {
         if (this.state === state){
@@ -64,6 +76,14 @@ cc.Class({
                 this.node.opacity = 255;
                 break;
             case EnemyState.Dead:
+                let action = cc.fadeOut(1);
+                let sequence = cc.sequence(action, cc.callFunc(()=>{
+                    cc.log("死了");
+                    this.node.destroy();
+                }));
+                this.node.runAction(sequence);
+
+
                 break;
             case EnemyState.EndPath:
                 break;
@@ -74,6 +94,19 @@ cc.Class({
     },
     isLiving: function () {
         if (this.state === EnemyState.Running){
+            return true;
+        }
+        return false;
+    },
+    beAttacked: function (damage) {
+        this.currentHealthCount -= damage;
+        if (this.currentHealthCount < 0){
+            this.currentHealthCount = 0;
+            this.setState(EnemyState.Dead);
+        }
+    },
+    isDead: function () {
+        if (this.state === EnemyState.Dead){
             return true;
         }
         return false;

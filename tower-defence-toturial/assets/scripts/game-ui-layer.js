@@ -11,7 +11,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.nowTime = 3;
+        this.nowTime = 4;
     }
     ,
     update: function (dt) {
@@ -20,9 +20,10 @@ cc.Class({
             // cc.log("now time = " +( this.nowTime - Math.floor(this.nowTime)));
 
             if ((this.nowTime - Math.floor(this.nowTime) )< 0.1){
-                this.timeCountDownLabel.string = Math.floor(this.nowTime);
+                this.timeCountDownLabel.string = (Math.floor(this.nowTime) - 1);
                 if (Math.floor(this.nowTime) === 0){
                     cc.log("游戏开始");
+                    this.timeCountDownLabel.string = "";
                     this.nowTime = 0;
                     global.event.fire("game_start");
                 }
