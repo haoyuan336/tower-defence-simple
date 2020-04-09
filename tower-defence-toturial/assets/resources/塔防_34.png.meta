@@ -1,12 +1,18 @@
 {
-  "ver": "1.0.0",
+  "ver": "2.3.4",
   "uuid": "35da72e3-a0e5-4c2f-9abf-17083fed9f15",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 93,
+  "height": 93,
+  "platformSettings": {},
   "subMetas": {
     "塔防_34": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "3ecf6a4b-de5e-4712-8f98-780df90bb3de",
       "rawTextureUuid": "35da72e3-a0e5-4c2f-9abf-17083fed9f15",
       "trimType": "auto",

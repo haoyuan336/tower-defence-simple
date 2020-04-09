@@ -145,8 +145,9 @@ cc.Class({
             }else {
                 cc.log("level config" + JSON.stringify(result));
             }
-            let config = result["level_1"];
-            this.levelConfig = config;
+            this.levelConfig = result.json["level_1"];
+            // this.levelConfig = config;
+            // console.log("level config", this.levelConfig);
             // this.currentWaveConfig = wavesConfig[0];
         });
     },
@@ -173,7 +174,7 @@ cc.Class({
                 this.addEnemyCurrentTime += dt;
             }
         }else {
-            if (this.addWaveCurrentTime > this.levelConfig.dt){
+            if (this.levelConfig && this.addWaveCurrentTime > this.levelConfig.dt){
                 this.currentWaveConfig = this.levelConfig.waves[this.currentWaveCount];
                 if (this.currentWaveCount < this.levelConfig.waves.length ){
                     this.currentWaveCount ++;

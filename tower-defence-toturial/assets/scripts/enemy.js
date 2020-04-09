@@ -26,7 +26,7 @@ cc.Class({
     onLoad: function () {
         this.state = EnemyState.Invalid;
         this.node.opacity = 0;
-        this.direction = cc.p(0, 0);
+        this.direction = cc.v2(0, 0);
         this.currentPathPointCount = 0;
         this.currentHealthCount = 0;
         this.totalHealthCount = 1;
@@ -42,7 +42,7 @@ cc.Class({
                 cc.log(err);
             }else {
                 // cc.log("enemy result = " + JSON.stringify(result));
-                let config = result["enemy_" + type];
+                let config = result.json["enemy_" + type];
                 this.speed = config.speed;
                 this.currentHealthCount = config.health;
                 this.totalHealthCount = config.health;
@@ -53,16 +53,16 @@ cc.Class({
     },
     update: function (dt) {
         if (this.state === EnemyState.Running){
-            let distance = cc.pDistance(this.node.position, this.pathPoints[this.currentPathPointCount].position);
+            let distance = this.node.position.sub(this.pathPoints[this.currentPathPointCount].position).mag();
             if (distance < 10){
                 this.currentPathPointCount ++;
                 if (this.currentPathPointCount === this.pathPoints.length){
                     this.setState(EnemyState.EndPath);
                     return
                 }
-                this.direction = cc.pNormalize(cc.pSub(this.pathPoints[this.currentPathPointCount].position, this.node.position));
+                this.direction = this.pathPoints[this.currentPathPointCount].position.sub(this.node.position).normalize();
             }else {
-                this.node.position = cc.pAdd(this.node.position, cc.pMult(this.direction, this.speed * dt));
+                this.node.position = this.node.position.add(this.direction.mul(this.speed * dt));
             }
         }
         this.healthProgressBar.progress = this.currentHealthCount / this.totalHealthCount;
@@ -79,7 +79,7 @@ cc.Class({
                 let action = cc.fadeOut(1);
                 let sequence = cc.sequence(action, cc.callFunc(()=>{
                     cc.log("死了");
-                    this.node.destroy();
+                    // this.node.destroy();
                 }));
                 this.node.runAction(sequence);
 
